@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hi</title>
+    <style>
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            background-size: cover;
+        }
+        #fadeText {
+            position: relative;
+            z-index: 1; 
+            opacity: 1;
+            color: white; 
+            font-size: 3em; 
+            text-align: center;
+            margin-top: 300px;
+        }
+        .fade {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+  
+        .button-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .audio-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop poster="poster.jpg" id="bgvid">
+            <source src="bg.mp4" type="video/mp4">
+        </video>
+    </div>
+    <audio id="backgroundMusic" loop>
+        <source src="background.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <button class="audio-button" id="playAudioButton">Play</button>
+    <div id="fadeText" class="wiggle"></div>
+    <div class="button-container">
+        <button id="myButton">Next</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const texts = [
+                "Hii, Meg! (click mo muna ung play para malupet hashdahsd)",
+                "Sorry for the sudden confession hehe",
+                "At first, I was happy with you being my friend",
+                "then I started to like you but like happy crush (it's not that serious).",
+                "I tried posting songs on my notes, and by chance, you were posting songs too.(i kinda assumed it was for me (i know its not)",
+                "and just so you know, most of it was for you.",
+                "Then, we started to talk a lot about each other's interests like music, games, movies, dramas, etc., and I think that's when things got serious.",
+                "I started to like you in a serious way.",
+                "I did things that I don't normally do, like going to school a little earlier than usual when I found out that you go to school early,",
+                "just to accompany you and have alone time with you even for a few minutes and even though you're sleeping most of the time (your presence is more than enough hehe)",
+                "I'm also happy every time we walk together after school, even if it's just a few minutes.",
+                "Having alone time with you is <33.",
+                "As time went by, we talked to each other a lot for long periods, which is unusual for me.",
+                "cause I tend to ignore people most of the time, and I really hate talking, but with you, I enjoy it.",
+                "I've been down ever since the pandemic, and you have no idea how much happiness you brought back into my life.",
+                "I just really want you to know how happy you made me feel and how much comfort you are to me.",
+                " I also really want to thank you for that, sincerely.",
+                "I really hope that we can still be friends after this:<",
+                "I tried to stop liking you many times but i just cant",
+                "One interaction and I'm once again so into you",
+                "anw, I’m sorry if this made you uncomfortable,",
+                "But you don't have to think about this too much.",
+                "I’ve prepared myself for all of the possible things that could happen after this",
+                "You don't have to pity me or anything because I'm doing this for my peace of mind",
+                "I know you like someone else, and I completely respect that",
+                "I don't really expect anything in return,",
+                "So, pls pls don’t be sorry if you can’t reciprocate what I feel, because I'm completely okay with that",
+                "I'm happy with us being just friends, so please don’t overthink this",
+                "I hope things won’t get awkward after this:<<"
+            ];
+            let clickCount = 0;
+            const fadeText = document.getElementById("fadeText");
+            const myButton = document.getElementById("myButton");
+
+            fadeText.innerHTML = texts[clickCount].split("").map(letter => `<span>${letter}</span>`).join("");
+            setTimeout(function() {
+                fadeText.classList.add("fade");
+            }, 5000);
+
+            myButton.addEventListener("click", function() {
+                clickCount++;
+                if (clickCount < texts.length) {
+                    fadeText.innerHTML = texts[clickCount];
+                    fadeText.classList.remove("fade");
+                    setTimeout(function() {
+                        fadeText.classList.add("fade");
+                    }, 5000);
+                }
+                if (clickCount === texts.length) {
+                    window.location.href = "hello.html";
+                }
+            });
+
+            const playAudioButton = document.getElementById("playAudioButton");
+            const backgroundMusic = document.getElementById("backgroundMusic");
+
+            playAudioButton.addEventListener("click", function() {
+                backgroundMusic.play();
+                playAudioButton.style.display = 'none'; 
+            });
+        });
+    </script>
+</body>
+</html>
